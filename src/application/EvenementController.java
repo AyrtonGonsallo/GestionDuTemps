@@ -107,25 +107,25 @@ public class EvenementController implements Initializable {
 		col_titre.setCellValueFactory(new PropertyValueFactory<Emploi_du_temps,String>("titre"));
 		col_desc.setCellValueFactory(new PropertyValueFactory<Emploi_du_temps,String>("description"));
 		col_statut.setCellValueFactory(new PropertyValueFactory<Emploi_du_temps,String>("status"));
-		listEmploi = Singleton.getInstance().getObservableEmplois();
+		listEmploi = Singleton.getInstance().getObservableEmplois(Main.id);
 		table_horaire.setItems(listEmploi);
 		table_horaire.setEditable(true);
 		col_statut.setCellFactory(TextFieldTableCell.forTableColumn());
 		
-		listE =Singleton.getInstance().getObservableEvents();
+		listE =Singleton.getInstance().getObservableEvents(Main.id);
 		col_evenement.setItems(listE);
 	}
 	public void updateTable() {
-		listEmploi = Singleton.getInstance().getObservableEmplois();
+		listEmploi = Singleton.getInstance().getObservableEmplois(Main.id);
 		table_horaire.setItems(listEmploi);
-		listE = Singleton.getInstance().getObservableEvents();
+		listE = Singleton.getInstance().getObservableEvents(Main.id);
 		col_evenement.setItems(listE);
 	}
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle rb) {
-		
+		ratio.setText(Singleton.getInstance().calcRatio(Main.id) +"%");
 		
 	}
 	

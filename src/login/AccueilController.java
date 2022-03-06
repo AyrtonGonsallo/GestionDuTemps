@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import objets.Singleton;
 
 public class AccueilController implements Initializable{
 	@FXML
@@ -35,6 +36,7 @@ public class AccueilController implements Initializable{
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		Singleton.getInstance();
 		
 	}
 

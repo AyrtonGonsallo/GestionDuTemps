@@ -68,7 +68,7 @@ public class Singleton
 				res=i;
 			}
 		}
-		return res;
+		return res; 
 	}
 
 
@@ -102,10 +102,13 @@ public class Singleton
 		}
 		return i;
 	}
-	public ObservableList<Emploi_du_temps> getObservableEmplois() {
+	public ObservableList<Emploi_du_temps> getObservableEmplois(int uid) {
 		ObservableList<Emploi_du_temps> list = FXCollections.observableArrayList();
 		for (Emploi_du_temps e:this.emplois){
-			list.add(e);
+			if(e.getUser_id()==uid){
+				list.add(e);
+			}
+			
 		}
 		return list;
 	}
@@ -133,7 +136,8 @@ public class Singleton
 			Emploi_du_temps em=lem.get(i);
 			if(em.equals(e)){
 				this.emplois.remove(i);
-				i--;
+				
+				break;
 			}
 		}
 	}
@@ -142,10 +146,13 @@ public class Singleton
 	public List<Evenement> getEvents() {
 		return events;
 	}
-	public ObservableList<Evenement> getObservableEvents() {
+	public ObservableList<Evenement> getObservableEvents(int uid) {
 		ObservableList<Evenement> list = FXCollections.observableArrayList();
 		for (Evenement e:this.events){
-			list.add(e);
+			if(e.getUser_id()==uid){
+				list.add(e);
+			}
+			
 		}
 		return list;
 	}
@@ -160,7 +167,7 @@ public class Singleton
 			Evenement em=lem.get(i);
 			if(em.equals(e)){
 				this.events.remove(i);
-				i--;
+				break;
 			}
 		}
 	}
@@ -188,6 +195,9 @@ public class Singleton
 	public double calcRatio(int uid) {
 		double total=Singleton.getInstance().getTotalEmploisUser(uid),faites=Singleton.getInstance().getTotalEmploisFiniUser(uid);
 		double p=(faites/total)*100;
+		if(total==0.0){
+			return 0.0;
+		}
 		return p;
 		
 	}
@@ -209,10 +219,14 @@ public class Singleton
 		Date d = new Date(Calendar.getInstance().getTime().getTime());
 		List<Evenement>leV=getInstance().getEvents();
 		for(int i=0;i<leV.size();i++){
-			Evenement e=leV.get(i);
-			if(e.getUser_id()==Main.id && ChronoUnit.DAYS.between(e.getDate().toLocalDate(), d.toLocalDate())>=2){
-				this.delEvent(e);
+			if(this.events.size()>i){
+				Evenement e=leV.get(i);
+				if(e.getUser_id()==Main.id && ChronoUnit.DAYS.between(e.getDate().toLocalDate(), d.toLocalDate())>=2){
+					this.delEvent(e);
+					i--;
+				}
 			}
+			
 		}
 		System.out.println("apres: "+this.events);
 		return 0;
@@ -239,10 +253,14 @@ public class Singleton
 		Time t = Time.valueOf(t3.toString());
 		List<Emploi_du_temps>leM=getInstance().getEmplois();
 		for( int i = 0; i < leM.size(); i++ ){
-			Emploi_du_temps em=leM.get(i);
-			if(em.getUser_id()==Main.id && (em.getHorraire_fin().compareTo(t))<0){
-				this.delEmplois(em);
+			if(this.emplois.size()>i){
+				Emploi_du_temps em=leM.get(i);
+				if(em.getUser_id()==Main.id && (em.getHorraire_fin().compareTo(t))<0){
+					this.delEmplois(em);
+					i--;
+				}
 			}
+			
 		}
 		System.out.println("apres: "+this.emplois);
 		return 0;
@@ -348,6 +366,8 @@ public class Singleton
 				this.emplois=(List<Emploi_du_temps>) InEmplois.readObject();
 			
 			InEmplois.close();
+			Thread.sleep(2000);
+			JOptionPane.showMessageDialog(null, "données chargées");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

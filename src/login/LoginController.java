@@ -55,7 +55,7 @@ public class LoginController implements Initializable{
 	
 	@FXML
 	private void Login(ActionEvent event) throws Exception{
-		
+		boolean existe=false;
 		try {
 			for(Utilisateur u: Singleton.getInstance().getUsers()){
 
@@ -68,6 +68,7 @@ public class LoginController implements Initializable{
 					Object tableViewParent=l.load();
 					application.AccueilController ac=l.getController();
 					//Scene tableViewScene=new Scene(tableViewParent);
+					existe=true;
 					Main.setUser(u.getLogin());
 					Main.id=u.getId();
 					ac.initData(u);
@@ -75,11 +76,12 @@ public class LoginController implements Initializable{
 					Main.grid.set(0,(Pane)tableViewParent);
 			        Main.setInd_c(0);
 					Main.root.getChildren().remove(Main.grid.get(6));
-				}else
-				{
-					JOptionPane.showMessageDialog(null, "Invalide");
-					Main.setPane(10);
+					break;
 				}
+			}
+			if(existe==false){
+				JOptionPane.showMessageDialog(null, "Invalide");
+				Main.setPane(10);
 			}
 		
 			
