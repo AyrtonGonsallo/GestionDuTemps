@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: C0C0C0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AjouterEvenementController">
+   <children>
+      <Accordion />
+      <VBox layoutX="122.0" layoutY="66.0" prefHeight="400.0" prefWidth="1000.0">
+         <children>
+            <TextField fx:id="txt_titre" prefHeight="75.0" prefWidth="573.0" promptText="titre de l'événement ">
+               <font>
+                  <Font size="23.0" />
+               </font></TextField>
+            <TextField fx:id="date" promptText="date (AAAA-MM-dd)">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="heure" promptText="heure (HH:MM:SS)">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txt_description" prefHeight="300.0" prefWidth="1367.0" promptText="Description complete">
+               <font>
+                  <Font size="36.0" />
+               </font></TextField>
+         </children>
+      </VBox>
+      <Button layoutX="122.0" layoutY="24.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="466.0" style="-fx-background-color: black;" text="Ajouter un événement" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="enregistrer" layoutX="1111.0" layoutY="522.0" mnemonicParsing="false" onAction="#enregistrer" prefHeight="39.0" prefWidth="131.0" style="-fx-background-color: C0C0C0;" text="Enregistrer">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="retour" layoutX="45.0" layoutY="541.0" mnemonicParsing="false" onAction="#retour" prefWidth="77.0" style="-fx-background-color: C0C0C0;" text="Retour">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

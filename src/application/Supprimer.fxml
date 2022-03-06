@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: C0C0C0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SupprimerController">
+   <children>
+      <GridPane layoutX="30.0" layoutY="50.0" prefHeight="500.0" prefWidth="1200.0" style="-fx-background-color: C0C0C0;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="246.0" minHeight="0.0" prefHeight="68.66667175292969" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="502.0" minHeight="10.0" prefHeight="373.3333282470703" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="58.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="71.0" prefWidth="391.0" text="SUPPRIMER EVENEMENTS">
+               <font>
+                  <Font name="System Bold Italic" size="23.0" />
+               </font>
+            </Label>
+            <Label text="SUPPRIMER HORRAIRES" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold Italic" size="23.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="suppEven" editable="false" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font></TextArea>
+            <TextArea fx:id="suppHor" editable="false" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="28.0" />
+               </font></TextArea>
+            <Button mnemonicParsing="false" onAction="#viderE" prefHeight="66.0" prefWidth="255.0" style="-fx-background-color: C0C0C0; -fx-border-style: solid;" text="Supprimer Evenements" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#viderH" style="-fx-background-color: C0C0C0; -fx-border-style: solid;" text="Supprimer horraires" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Button>
+         </children>
+      </GridPane>
+      <Button layoutX="1106.0" layoutY="567.0" mnemonicParsing="false" onAction="#retour" style="-fx-background-color: C0C0C0; -fx-border-style: solid;" text="retour">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
