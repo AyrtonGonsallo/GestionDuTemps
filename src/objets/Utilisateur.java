@@ -37,6 +37,10 @@ public class Utilisateur implements Serializable{
 	public void setMotdepasse(String motdepasse) {
 		this.motdepasse = motdepasse;
 	}
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", age=" + age + ", login=" + login + ", date_creation=" + date_creation + "]";
+	}
 	public String getEmail() {
 		return email;
 	}

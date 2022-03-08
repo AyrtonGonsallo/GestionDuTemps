@@ -26,7 +26,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="param" depthTest="ENABLE" layoutX="1207.0" layoutY="8.0" mnemonicParsing="false" onAction="#button_param" style="-fx-background-color: C0C0C0;" text="Paramètres" underline="true">
+      <Button fx:id="param" depthTest="ENABLE" layoutX="1193.0" layoutY="8.0" mnemonicParsing="false" onAction="#button_param" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #ff8800;" text="Bloc Notes" textFill="WHITE" underline="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -41,7 +41,7 @@
             <Font name="Bookshelf Symbol 7" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="341.0" layoutY="360.0" prefHeight="80.0" prefWidth="584.0" text="&quot;Je n'est jamais revé du succes. J'ai travaillé pour l'avoir&quot; - Esteé Lauder" wrapText="true">
+      <Label fx:id="citation" layoutX="341.0" layoutY="360.0" prefHeight="80.0" prefWidth="584.0" text="&quot;Je n'est jamais revé du succes. J'ai travaillé pour l'avoir&quot; - Esteé Lauder" wrapText="true">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -49,7 +49,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Label>
-      <Button fx:id="quitter" layoutX="1203.0" layoutY="574.0" mnemonicParsing="false" onAction="#quitter" style="-fx-background-color: C0C0C0;" text="Quitter">
+      <Button fx:id="quitter" layoutX="1203.0" layoutY="574.0" mnemonicParsing="false" onAction="#quitter" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #ff0000;" text="Quitter" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -70,17 +70,22 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="suppr" depthTest="ENABLE" layoutX="1112.0" layoutY="8.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: C0C0C0;" text="Supprimer" underline="true">
+      <Button fx:id="suppr" depthTest="ENABLE" layoutX="1112.0" layoutY="8.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #0088ff;" text="Supprimer" textFill="WHITE" underline="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="param1" depthTest="ENABLE" layoutX="1005.0" layoutY="8.0" mnemonicParsing="false" onAction="#deconnecter" style="-fx-background-color: C0C0C0;" text="Se deconnecter" underline="true">
+      <Button fx:id="param1" depthTest="ENABLE" layoutX="1005.0" layoutY="8.0" mnemonicParsing="false" onAction="#deconnecter" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #888800;" text="Se deconnecter" textFill="WHITE" underline="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="param1" depthTest="ENABLE" layoutX="925.0" layoutY="8.0" mnemonicParsing="false" onAction="#save" style="-fx-background-color: C0C0C0;" text="enregistrer" underline="true">
+      <Button fx:id="param1" depthTest="ENABLE" layoutX="925.0" layoutY="8.0" mnemonicParsing="false" onAction="#save" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #008800;" text="Enregistrer" textFill="WHITE" underline="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="param11" depthTest="ENABLE" layoutX="822.0" layoutY="8.0" mnemonicParsing="false" onAction="#espaceAdmin" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #0033ff;" text="Espace Admin" textFill="WHITE" underline="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

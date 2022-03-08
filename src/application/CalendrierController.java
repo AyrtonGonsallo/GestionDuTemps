@@ -184,22 +184,8 @@ public class CalendrierController implements Initializable{
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");   
 		Date dateSql=Date.valueOf(dtf.format(d));
 		try {
-			InfosDuJour i=Singleton.getInstance().getInfosDuJour(Main.id,dateSql );
-			if(i!=null) {
+			
 				new Main().son1();
-				FXMLLoader l=new FXMLLoader();
-				l.setLocation(getClass().getResource( "/application/jours.fxml"));
-				Object tableViewParent=l.load();
-				application.JoursController jc=l.getController();
-				jc.initData(d,i);
-				Main.root.getChildren().add((AnchorPane)tableViewParent);
-				Main.grid.set(11,(AnchorPane)tableViewParent);
-		        Main.setInd_c(11);
-				Main.root.getChildren().remove(Main.grid.get(2));
-				Main.setPane(11);
-			}else
-			{
-				new Main().son1();;
 				FXMLLoader l=new FXMLLoader();
 				l.setLocation(getClass().getResource( "/application/jours.fxml"));
 				Object tableViewParent=l.load();
@@ -211,7 +197,7 @@ public class CalendrierController implements Initializable{
 				Main.root.getChildren().remove(Main.grid.get(2));
 				Main.setPane(11);
 			}
-			}
+			
 		catch(Exception e) {
 			
 		}

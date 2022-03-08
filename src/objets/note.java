@@ -3,9 +3,13 @@ package objets;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Commentaire implements Serializable{
+public class note implements Serializable{
 
 	
+	@Override
+	public String toString() {
+		return "note [id=" + id + ", user_id=" + user_id + ", texte=" + texte + ", date=" + date + "]";
+	}
 	/**
 	 * 
 	 */

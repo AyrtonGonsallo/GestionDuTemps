@@ -24,8 +24,8 @@ public class Evenement implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Evenement n·" + id +" - " + titre+": (" + description +")"
-				+ ", heure=" + heure + ", date=" + date + "]";
+		return "ID: " + id +" User id:"+user_id+" - " + titre+": (" + description +")"
+				+ ", heure=" + heure + ", date=" + date ;
 	}
 	public int getUser_id() {
 		return user_id;

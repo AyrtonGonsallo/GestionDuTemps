@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,7 +25,7 @@ public class Singleton
     private Singleton()
     {
     	this.users=new ArrayList<Utilisateur>();
-    	this.commentaires=new ArrayList<Commentaire>();
+    	this.notes=new ArrayList<note>();
     	this.infos=new ArrayList<InfosDuJour>();
     	this.emplois=new ArrayList<Emploi_du_temps>();
     	this.events=new ArrayList<Evenement>();
@@ -44,16 +45,38 @@ public class Singleton
     /** Instance unique non préinitialisée */
     private static Singleton INSTANCE = null;
     
-    public List<Commentaire> getCommentaires() {
-		return commentaires;
+    public List<note> getUsernotes(int userid) {
+    	List<note>liste=new ArrayList<>();
+    	Thread t=new Thread(){
+			public void run() {
+				for(note c: notes){
+		    		if(c.getUser_id()==userid){
+		    			liste.add(c);
+		    		}
+				}
+			};
+		};
+		t.start();
+    	try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+		return liste;
+	}
+    public List<note> getnotes() {
+    	
+		return this.notes;
 	}
 
 
-	public void addCommentaire(Commentaire e) {
-		this.commentaires.add(e);
+	public void addnote(note e) {
+		this.notes.add(e);
 	}
-	public void delCommentaire(int pos) {
-		this.commentaires.remove(pos);
+	public void delnote(int pos) {
+		this.notes.remove(pos);
 	}
 	
 
@@ -61,11 +84,13 @@ public class Singleton
 	public List<InfosDuJour> getInfos() {
 		return infos;
 	}
-	public InfosDuJour getInfosDuJour(int user_id,Date jour) {
+	public InfosDuJour getInfosDuJour(int user_id,String jour) {
 		InfosDuJour res=null;
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		for(InfosDuJour i:this.infos){
-			if(i.getId()==user_id && i.getJour().equals(jour)){
+			if(i.getUser_id()==user_id && format.format(i.getJour()).equals(jour)){
 				res=i;
+				break;
 			}
 		}
 		return res; 
@@ -73,15 +98,44 @@ public class Singleton
 
 
 	public void addInfos(InfosDuJour e) {
-		this.infos.add(e);
-	}
-	public void delInfos(int pos) {
-		this.infos.remove(pos);
+		boolean update=false;
+		for(InfosDuJour info:this.infos){
+			if(info.getJour().toString().equals(e.getJour().toString())){
+				info.setInformation(e.getInformation());
+				update=true;
+			}
+		}
+		if(update==false){
+			this.infos.add(e);
+		}
+		
 	}
 
 
 	public List<Emploi_du_temps> getEmplois() {
 		return emplois;
+	}
+	public Emploi_du_temps getEmploi(int id) {
+		Emploi_du_temps emp = null;
+		for (Emploi_du_temps e:this.emplois){
+			if(e.getId()==id){
+				emp=e;
+				break;
+			}
+			
+		}
+		return emp;
+	}
+	public Evenement getEvent(int id) {
+		Evenement ev = null;
+		for (Evenement e:this.events){
+			if(e.getId()==id){
+				ev=e;
+				break;
+			}
+			
+		}
+		return ev;
 	}
 	
 	public double getTotalEmploisUser(int user_id) {
@@ -141,15 +195,58 @@ public class Singleton
 			}
 		}
 	}
-
+	public void delEmplois(int id) {
+		List<Emploi_du_temps>lem=this.emplois;
+		for( int i = 0; i < lem.size(); i++ ){
+			Emploi_du_temps em=lem.get(i);
+			if(em.getId()==id){
+				this.emplois.remove(i);
+				JOptionPane.showMessageDialog(null, "supression faite!");
+				break;
+			}
+		}
+	}
+	public void delInfos(int id) {
+		List<InfosDuJour>lem=this.infos;
+		for( int i = 0; i < lem.size(); i++ ){
+			InfosDuJour em=lem.get(i);
+			if(em.getId()==id){
+				this.infos.remove(i);
+				JOptionPane.showMessageDialog(null, "supression faite!");
+				break;
+			}
+		}
+	}
+	public void delUser(int id) {
+		List<Utilisateur>lem=this.users;
+		for( int i = 0; i < lem.size(); i++ ){
+			Utilisateur em=lem.get(i);
+			if(em.getId()==id){
+				this.users.remove(i);
+				JOptionPane.showMessageDialog(null, "supression faite!");
+				break;
+			}
+		}
+	}
+	public void delNote(int id) {
+		List<note>lem=this.notes;
+		for( int i = 0; i < lem.size(); i++ ){
+			note em=lem.get(i);
+			if(em.getId()==id){
+				this.notes.remove(i);
+				JOptionPane.showMessageDialog(null, "supression faite!");
+				break;
+			}
+		}
+	}
 
 	public List<Evenement> getEvents() {
 		return events;
 	}
-	public ObservableList<Evenement> getObservableEvents(int uid) {
+	public ObservableList<Evenement> getObservableEvents(int id) {
 		ObservableList<Evenement> list = FXCollections.observableArrayList();
 		for (Evenement e:this.events){
-			if(e.getUser_id()==uid){
+			if(e.getUser_id()==id){
 				list.add(e);
 			}
 			
@@ -171,7 +268,17 @@ public class Singleton
 			}
 		}
 	}
-
+	public void delEvent(int id) {
+		List<Evenement>lem=this.events;
+		for( int i = 0; i < lem.size(); i++ ){
+			Evenement em=lem.get(i);
+			if(em.getId()== id){
+				this.events.remove(i);
+				JOptionPane.showMessageDialog(null, "supression faite!");
+				break;
+			}
+		}
+	}
 	public List<Utilisateur> getUsers() {
 		return users;
 	}
@@ -188,9 +295,6 @@ public class Singleton
 
 	public void addUser(Utilisateur e) {
 		this.users.add(e);
-	}
-	public void delUser(int pos) {
-			this.users.remove(pos);
 	}
 	public double calcRatio(int uid) {
 		double total=Singleton.getInstance().getTotalEmploisUser(uid),faites=Singleton.getInstance().getTotalEmploisFiniUser(uid);
@@ -215,7 +319,6 @@ public class Singleton
 		return s;
 	}
 	public int viderEvenements(){
-		System.out.println("avant: "+this.events);
 		Date d = new Date(Calendar.getInstance().getTime().getTime());
 		List<Evenement>leV=getInstance().getEvents();
 		for(int i=0;i<leV.size();i++){
@@ -228,7 +331,6 @@ public class Singleton
 			}
 			
 		}
-		System.out.println("apres: "+this.events);
 		return 0;
 	}
 	public String HorairesAvider(){
@@ -247,7 +349,6 @@ public class Singleton
 	}
 	
 	public int viderHoraires(){
-		System.out.println("avant: "+this.emplois);
 		long now = System.currentTimeMillis();
 		Time t3 = new Time(now);
 		Time t = Time.valueOf(t3.toString());
@@ -262,12 +363,11 @@ public class Singleton
 			}
 			
 		}
-		System.out.println("apres: "+this.emplois);
 		return 0;
 	}
 	
 
-	private List<Commentaire> commentaires;
+	private List<note> notes;
     private List<InfosDuJour>infos;
     private List<Emploi_du_temps>emplois;
     private List<Evenement>events;
@@ -285,13 +385,13 @@ public class Singleton
     public void save(){
     	
 		try {
-			File f1=new File("commentaires.txt");
+			File f1=new File("notes.txt");
 			f1.createNewFile();
-			FileOutputStream commentaires= new FileOutputStream(f1);
+			FileOutputStream notes= new FileOutputStream(f1);
 			
-			ObjectOutputStream OutCommemtaires = new ObjectOutputStream(commentaires);
-			//for(Commentaire c:this.commentaires){
-				OutCommemtaires.writeObject(this.commentaires);
+			ObjectOutputStream OutCommemtaires = new ObjectOutputStream(notes);
+			//for(note c:this.notes){
+				OutCommemtaires.writeObject(this.notes);
 			//}
 			OutCommemtaires.close();
 			File f2=new File("utilisateurs.txt");
@@ -334,33 +434,44 @@ public class Singleton
 		}
 		
     }
+    
     public void load(){
     	try {
-			FileInputStream commentaires= new FileInputStream(new File("commentaires.txt"));
-			ObjectInputStream InCommemtaires = new ObjectInputStream(commentaires);
+    		File f1=new File("notes.txt");
+    		f1.createNewFile();
+    		File f2=new File("utilisateurs.txt");
+    		f2.createNewFile();
+    		File f3=new File("infosDuJour.txt");
+    		f3.createNewFile();
+    		File f4=new File("evenements.txt");
+    		f4.createNewFile();
+    		File f5=new File("emplois.txt");
+    		f5.createNewFile();
+			FileInputStream notes= new FileInputStream(f1);
+			ObjectInputStream InCommemtaires = new ObjectInputStream(notes);
 			
-				this.commentaires=(List<Commentaire>) InCommemtaires.readObject();
+				this.notes=(List<note>) InCommemtaires.readObject();
 			
 			InCommemtaires.close();
-			FileInputStream utilisateurs= new FileInputStream(new File("utilisateurs.txt"));
+			FileInputStream utilisateurs= new FileInputStream(f2);
 			ObjectInputStream InUtilisateurs = new ObjectInputStream(utilisateurs);
 			
 				this.users=(List<Utilisateur>) InUtilisateurs.readObject();
 			
 			InUtilisateurs.close();
-			FileInputStream infosDuJour= new FileInputStream(new File("infosDuJour.txt"));
+			FileInputStream infosDuJour= new FileInputStream(f3);
 			ObjectInputStream InInfosDuJour = new ObjectInputStream(infosDuJour);
 			
 				this.infos=(List<InfosDuJour>) InInfosDuJour.readObject();
 			
 			InInfosDuJour.close();
-			FileInputStream evenements= new FileInputStream(new File("evenements.txt"));
+			FileInputStream evenements= new FileInputStream(f4);
 			ObjectInputStream InEvenements = new ObjectInputStream(evenements);
 			
 				this.events=(List<Evenement>) InEvenements.readObject();
 			
 			InEvenements.close();
-			FileInputStream emplois= new FileInputStream(new File("emplois.txt"));
+			FileInputStream emplois= new FileInputStream(f5);
 			ObjectInputStream InEmplois = new ObjectInputStream(emplois);
 			
 				this.emplois=(List<Emploi_du_temps>) InEmplois.readObject();

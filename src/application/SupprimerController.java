@@ -14,6 +14,10 @@ public class SupprimerController implements Initializable{
 		suppEven.setText(Singleton.getInstance().EvenementsAvider());
 		suppHor.setText(Singleton.getInstance().HorairesAvider());
 	}
+	public void update(){
+		suppEven.setText(Singleton.getInstance().EvenementsAvider());
+		suppHor.setText(Singleton.getInstance().HorairesAvider());
+	}
 	@FXML
 	TextArea suppEven;
 	@FXML
@@ -21,10 +25,12 @@ public class SupprimerController implements Initializable{
 	@FXML
 	public void viderE() {
 		Singleton.getInstance().viderEvenements();
+		update();
 	}
 	@FXML
 	public void viderH() {
 		Singleton.getInstance().viderHoraires();
+		update();
 	}
 	@FXML
 	public void retour(ActionEvent event) {

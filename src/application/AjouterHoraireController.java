@@ -2,6 +2,7 @@ package application;
 
 import java.net.URL;
 import java.sql.Time;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import objets.Emploi_du_temps;
 import objets.Singleton;
@@ -26,7 +28,7 @@ public class AjouterHoraireController {
 	@FXML
 	private TextField txt_activite;
 	@FXML
-	private TextField description;
+	private TextArea description;
 	
 	@FXML
 	public void enregistrer(ActionEvent event) {
@@ -48,11 +50,12 @@ public class AjouterHoraireController {
 		if(deb.before(fin)) {
 		
 		try {
+			List<Emploi_du_temps>lempl=Singleton.getInstance().getEmplois();
 			Emploi_du_temps e=new Emploi_du_temps();
 			e.setDescription(description.getText());
 			e.setHorraire_debut(deb);
 			e.setHorraire_fin(fin);
-			e.setId(Singleton.getInstance().getEmplois().size()+1);
+			e.setId(lempl.get(lempl.size()-1).getId()+1);
 			e.setStatus(Status.inachevée.toString());
 			e.setTitre(txt_activite.getText());
 			e.setUser_id(Main.id);

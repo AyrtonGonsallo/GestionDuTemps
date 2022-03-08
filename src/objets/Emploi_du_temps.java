@@ -17,7 +17,7 @@ public class Emploi_du_temps implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Emploi_du_temps [id=" + id + ", horraire_fin=" + horraire_fin + ", horraire_debut=" + horraire_debut
+		return "Emploi_du_temps [id=" + id + ", user id="+user_id+", horraire_fin=" + horraire_fin + ", horraire_debut=" + horraire_debut
 				+ ", titre=" + titre + ", status=" + status + "]";
 	}
 	public void setId(int id) {

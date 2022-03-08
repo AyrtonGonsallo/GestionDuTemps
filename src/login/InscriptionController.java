@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -64,7 +65,8 @@ public class InscriptionController implements Initializable {
 		try {
 			if(user_password1.getText().equals(user_password2.getText())){
 			Utilisateur u=new Utilisateur();
-			u.setId(Singleton.getInstance().getUsers().size()+1);
+			List<Utilisateur>users=Singleton.getInstance().getUsers();
+			u.setId(users.get(users.size()-1).getId()+1);
 			u.setLogin(user_id_up.getText());
 			u.setMotdepasse( user_password1.getText());
 			u.setEmail( email.getText());

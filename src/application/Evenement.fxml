@@ -55,7 +55,7 @@
       </VBox>
       <HBox fx:id="footer" layoutX="78.0" layoutY="466.0" prefHeight="118.0" prefWidth="1047.0">
          <children>
-            <Button fx:id="add_evenement_button" mnemonicParsing="false" onAction="#nouveauEvenement" prefHeight="51.0" prefWidth="352.0" style="-fx-background-color: C0C0C0;" text="Ajouter un évenement" underline="true">
+            <Button fx:id="add_evenement_button" mnemonicParsing="false" onAction="#nouveauEvenement" prefHeight="51.0" prefWidth="352.0" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #00aa00;" textFill="WHITE"  text="Ajouter un évenement" underline="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -76,7 +76,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Button fx:id="add_horaire_button" mnemonicParsing="false" onAction="#nouveauHoraire" prefHeight="44.0" prefWidth="279.0" style="-fx-background-color: C0C0C0;" text="Ajouter un horaire" underline="true">
+            <Button fx:id="add_horaire_button" mnemonicParsing="false" onAction="#nouveauHoraire" prefHeight="44.0" prefWidth="279.0" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #0088ff;" textFill="WHITE"  text="Ajouter un horaire" underline="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -89,7 +89,7 @@
             <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
          </padding>
       </HBox>
-      <Button fx:id="accueil_button" layoutX="12.0" layoutY="11.0" mnemonicParsing="false" onAction="#retour" prefWidth="77.0" style="-fx-background-color: C0C0C0;" text="Accueil" underline="true">
+      <Button fx:id="accueil_button" layoutX="12.0" layoutY="11.0" mnemonicParsing="false" onAction="#retour" prefWidth="77.0" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #00ff00;" textFill="WHITE"  text="Accueil" underline="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -97,7 +97,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="1202.0" layoutY="536.0" mnemonicParsing="false" onAction="#retour" style="-fx-background-color: C0C0C0;" text="Retour">
+      <Button layoutX="1202.0" layoutY="536.0" mnemonicParsing="false" onAction="#retour" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #ff0000;" textFill="WHITE"  text="Retour">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>

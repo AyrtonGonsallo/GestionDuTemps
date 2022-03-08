@@ -22,14 +22,37 @@ import objets.Utilisateur;
 
 
 public class AccueilController implements Initializable{
+	String []citations={"´Je n'est jamais revé du succes. J'ai travaillé pour l'avoir´ - Esteé Lauder",
+			"´Si j'ai vu si loin, c'est que j'étais monté sur des épaules de géants.´ - Sir Isaac Newton",
+			"´La vie, c'est comme une bicyclette, il faut avancer pour ne pas perdre l'équilibre.´ - Albert Einstein ",
+			"´ L'intelligence est la capacité de s'adapter au changement.´ - Stephen Hawking",
+			"´J'ai été chanceux. J'ai eu quatre ans de bonheur. Certains personnes n'ont seulement quatre jours.´ - Harold Finch",
+			"´Quiconque regarde le monde comme si c'était une partie d'échecs mérite de perdre.´ - Harold Finch",
+			"“Le temps ne cicatrise pas les outrages du temps.” - Alain Bosquet",
+			"“Mieux vaut un temps d'été stable, plutôt qu'un temps détestable.” - James Stuart Mills ",
+			"“Qui dit cérébral ne dit pas nécessairement intelligent. Repassez ça de temps en temps.” - Elie Feron",
+			"“La grande affaire et la seule qu’on doive avoir, c’est de vivre heureux.” - Voltaire",
+			"“L’univers m’embarrasse et je ne puis songer que cette horloge existe et n’ait pas d’horloger.” - Voltaire ",
+			"´L'âme déréglée est comme un tonneau percé à cause de sa nature insatiable.´ - Socrate",
+			"“Les yeux de l’esprit ne commencent à être perçants que quand ceux du corps commencent à baisser.” - Platon",
+			"“La victoire sur soi est la plus grande des victoires.” - Platon",
+			"“On peut en savoir plus sur quelqu'un en une heure de jeu qu'en une année de conversation.” - Platon",
+			"´Le plus grand bien qui puisse être dans un État est d’avoir de vrais philosophes.´ - Descartes",
+			"“Qui vit de combattre un ennemi a tout intérêt de le laisser en vie.” - Nietzsche",
+			"“La folie est quelque chose de rare chez l'individu ; elle est la règle pour les groupes, les partis, les peuples, les époques. ” - Nietzsche"
+	};
+	
 	private Utilisateur u;
 	public void initData (Utilisateur user){
 		u=user;
 		utilisateurs.setText(utilisateurs.getText()+u.getLogin());
 		ident.setText(ident.getText()+String.valueOf(user.getId()));
+		citation.setText(citations[((int)(Math.random()*20))%citations.length]);
 	}
 	@FXML
 	private Label ident;//id de l'utilisateur connecté
+	@FXML
+	private Label citation;
 	@FXML
 	private Label utilisateurs;//utilisateurs connectés
 	@FXML
@@ -87,6 +110,11 @@ public class AccueilController implements Initializable{
 		Platform.exit();
 	}
 	@FXML
+	public void espaceAdmin(ActionEvent event) {
+		new Main().son2();
+		Main.setPane(15);
+	}
+	@FXML
 	public void save(ActionEvent event) {
 		Thread t = new Thread() {
 		      public void run() {
@@ -111,7 +139,7 @@ public class AccueilController implements Initializable{
 	
 	
 	public void initialize(URL arg0, ResourceBundle rb) {
-		
+		citation.setText(citations[((int)(Math.random()*20))%citations.length]);
 		
 	}
 

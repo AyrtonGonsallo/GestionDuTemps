@@ -2,6 +2,8 @@ package objets;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 public class InfosDuJour implements Serializable {
 	
@@ -31,6 +33,11 @@ public class InfosDuJour implements Serializable {
 	}
 	public int getUser_id() {
 		return user_id;
+	}
+	@Override
+	public String toString() {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy"); 
+		return "ID: "+id+" jour=" + format.format(jour) + ", user_id=" + user_id + " "+information;
 	}
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;

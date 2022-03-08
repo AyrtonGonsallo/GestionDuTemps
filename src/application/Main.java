@@ -52,7 +52,7 @@ public class Main extends Application {
 		    root =(AnchorPane) FXMLLoader.load(getClass().getResource("/application/fond.fxml"));
 			Scene scene = new Scene(root,500,500);
 			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/accueil.fxml")));//0
-			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/parametres.fxml")));//1
+			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/notes.fxml")));//1
 			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/calendrier.fxml")));//2
 			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/Evenement.fxml")));//3
 			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/AjouterEvenement.fxml")));//4
@@ -66,6 +66,7 @@ public class Main extends Application {
 			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/application/actus.fxml")));//12
 			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/login/InfosCompte.fxml")));//13
 			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/application/Supprimer.fxml")));//14		
+			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/application/admin.fxml")));//15	
 			root.getChildren().add(grid.get(6));
 			
 			scene.getStylesheets().add(getClass().getResource("application.css" ).toExternalForm());

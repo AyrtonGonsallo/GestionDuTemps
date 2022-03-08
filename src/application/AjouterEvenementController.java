@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import objets.Evenement;
 import objets.Singleton;;
@@ -22,7 +24,7 @@ public class AjouterEvenementController implements Initializable {
 	@FXML
 	private TextField txt_titre;
 	@FXML
-	private TextField txt_description;
+	private TextArea txt_description;
 	@FXML
 	private TextField date;
 	@FXML
@@ -42,11 +44,12 @@ public class AjouterEvenementController implements Initializable {
 	
 	public void addEvenement() {
 		try {
+			List<Evenement>events=Singleton.getInstance().getEvents();
 			Evenement e=new Evenement();
 			e.setDate(Date.valueOf(date.getText()));
 			e.setDescription(txt_description.getText());
 			e.setHeure(Time.valueOf(heure.getText()) );
-			e.setId(Singleton.getInstance().getEvents().size()+1);
+			e.setId(events.get(events.size()-1).getId()+1);
 			e.setTitre(txt_titre.getText());
 			e.setUser_id(Main.id);
 			Singleton.getInstance().addEvent(e);

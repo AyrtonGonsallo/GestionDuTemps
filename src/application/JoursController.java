@@ -8,6 +8,7 @@ import java.sql.Date;
 import objets.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -24,14 +25,17 @@ import javafx.scene.control.TextArea;
 public class JoursController implements Initializable{
 	@FXML
 	private Label datedujour;
-	public void initData (LocalDate d,InfosDuJour i){
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");   
-		datedujour.setText(dtf.format(d));
-		infos.setText(i.getInformation());
-	}
 	public void initData (LocalDate d){
+		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");   
 		datedujour.setText(dtf.format(d));
+		InfosDuJour i=Singleton.getInstance().getInfosDuJour(Main.id, datedujour.getText());
+		if(i!=null){
+			String infos1=i.getInformation();
+			//System.out.println(infos1);
+			infos.setText(infos1);
+		}
+		
 	}
 	@FXML
 	private Button retour;
@@ -40,7 +44,7 @@ public class JoursController implements Initializable{
 	@FXML
 	public void retourner(ActionEvent event) {
 		new Main().son2();
-		Main.setPane(0);
+		Main.setPane(2);
 	}
 	
 	public void enregistrer(ActionEvent event) {
@@ -51,8 +55,9 @@ public class JoursController implements Initializable{
 		
 		
 		try {
+			List<InfosDuJour>infosliste=Singleton.getInstance().getInfos();
 			InfosDuJour i=new InfosDuJour();
-			i.setId(Singleton.getInstance().getInfos().size()+1);
+			i.setId(infosliste.get(infosliste.size()-1).getId()+1);
 			i.setInformation(infos.getText());
 			i.setJour(d);
 			i.setUser_id(Main.id);
@@ -64,7 +69,6 @@ public class JoursController implements Initializable{
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
 
 	}
 	
