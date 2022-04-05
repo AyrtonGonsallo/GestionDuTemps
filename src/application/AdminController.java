@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import objets.Emploi_du_temps;
 import objets.Evenement;
 import objets.InfosDuJour;
+import objets.Projet;
 import objets.Singleton;
 import objets.Utilisateur;
 import objets.note;
@@ -103,6 +104,17 @@ public class AdminController implements Initializable{
 					liste.getItems().add("aucun "+viewChoice.getValue());
 				}
 				break;
+			case "Projet":
+				List<Projet>lp=new ArrayList<>();
+				lp=Singleton.getInstance().getProjets();
+				if(lp!=null && lp.size()>0){
+					for(Projet e:lp){
+					liste.getItems().add(e.toString());
+					}
+				}else{
+					liste.getItems().add("aucun "+viewChoice.getValue());
+				}
+				break;
 			default:
 				break;
 			}
@@ -139,6 +151,16 @@ public class AdminController implements Initializable{
 				}
 				
 				break;
+			case "Projet":
+				Projet p=null;
+				p=Singleton.getInstance().getProjet(Integer.valueOf(id));
+				if(p!=null){
+					liste.getItems().add(p.toString());
+				}else{
+					liste.getItems().add("aucun "+viewChoice.getValue()+" a la position "+viewId.getText());
+				}
+				
+				break;
 			default:
 				liste.getItems().add("pas encore implémenté...");
 				break;
@@ -170,6 +192,9 @@ public class AdminController implements Initializable{
 				case "Utilisateur":
 					Singleton.getInstance().delUser(Integer.valueOf(id));
 					break;
+				case "Projet":
+					Singleton.getInstance().delProjets(Integer.valueOf(id));
+					break;
 				default:
 					break;
 				}
@@ -188,11 +213,13 @@ public class AdminController implements Initializable{
 		viewChoice.getItems().add("Infos du Jour");
 		viewChoice.getItems().add("Note");
 		viewChoice.getItems().add("Utilisateur");
+		viewChoice.getItems().add("Projet");
 		supprChoice.getItems().add("Emploi du temps");
 		supprChoice.getItems().add("Evenement");
 		supprChoice.getItems().add("Infos du Jour");
 		supprChoice.getItems().add("Note");
 		supprChoice.getItems().add("Utilisateur");
+		supprChoice.getItems().add("Projet");
 	}
 
 	

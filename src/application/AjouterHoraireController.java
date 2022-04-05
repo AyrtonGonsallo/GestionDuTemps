@@ -9,22 +9,33 @@ import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import objets.Emploi_du_temps;
 import objets.Singleton;
 import objets.Status;
 
-public class AjouterHoraireController {
+public class AjouterHoraireController implements Initializable {
 	@FXML
 	private Button enregistrer;
 	@FXML
 	private Button retour;
 	@FXML
-	private TextField horaire_debut;
+	private Spinner<Integer>heureD; 
 	@FXML
-	private TextField horaire_fin;
+	private Spinner<Integer>minutesD;
+	@FXML
+	private Spinner<Integer>secondesD;
+	@FXML
+	private Spinner<Integer>heureF; 
+	@FXML
+	private Spinner<Integer>minutesF;
+	@FXML
+	private Spinner<Integer>secondesF;
 	@FXML
 	private TextField txt_activite;
 	@FXML
@@ -45,8 +56,8 @@ public class AjouterHoraireController {
 	
 	
 	public void AddHoraire() {
-	Time deb=Time.valueOf( horaire_debut.getText());
-	Time fin=Time.valueOf( horaire_fin.getText());
+	Time deb=Time.valueOf( heureD.getValue()+":"+minutesD.getValue()+":"+secondesD.getValue());
+	Time fin=Time.valueOf(  heureF.getValue()+":"+minutesF.getValue()+":"+secondesF.getValue());
 		if(deb.before(fin)) {
 		
 		try {
@@ -55,7 +66,12 @@ public class AjouterHoraireController {
 			e.setDescription(description.getText());
 			e.setHorraire_debut(deb);
 			e.setHorraire_fin(fin);
-			e.setId(lempl.get(lempl.size()-1).getId()+1);
+			if(lempl.size()==0){
+				e.setId(1);
+			}else{
+				e.setId(lempl.get(lempl.size()-1).getId()+1);
+			}
+			
 			e.setStatus(Status.inachevée.toString());
 			e.setTitre(txt_activite.getText());
 			e.setUser_id(Main.id);
@@ -75,8 +91,24 @@ public class AjouterHoraireController {
 	}
 
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+		heureD.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24)
+	        );
+		minutesD.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60)
+	        );
+		secondesD.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60)
+	        );
+		heureF.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24)
+	        );
+		minutesF.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60)
+	        );
+		secondesF.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60)
+	        );
 	}
 
 }

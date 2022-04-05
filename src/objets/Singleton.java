@@ -29,6 +29,7 @@ public class Singleton
     	this.infos=new ArrayList<InfosDuJour>();
     	this.emplois=new ArrayList<Emploi_du_temps>();
     	this.events=new ArrayList<Evenement>();
+    	this.projets=new ArrayList<Projet>();
     	Thread t = new Thread() {
 		      public void run() {
 		        try{
@@ -79,7 +80,9 @@ public class Singleton
 		this.notes.remove(pos);
 	}
 	
-
+	public List<Projet> getProjets() {
+		return projets;
+	}
 
 	public List<InfosDuJour> getInfos() {
 		return infos;
@@ -206,6 +209,87 @@ public class Singleton
 			}
 		}
 	}
+	//projets
+	public Projet getProjet(int id) {
+		Projet  ev = null;
+		for (Projet  e:this.projets){
+			if(e.getId()==id){
+				ev=e;
+				break;
+			}
+			
+		}
+		return ev;
+	}
+	public double getTotalProjetsUser(int user_id) {
+		double i=0;
+		for(Projet e:this.projets){
+			if(e.getUser_id()==user_id){
+				i++;
+			}
+		}
+		return i;
+	}
+	public double getTotalProjetsFiniUser(int user_id) {
+		double i=0;
+		for(Projet e:this.projets){
+			if(e.getUser_id()==user_id && e.getStatus().equals(Status.achevée.toString())){
+				i++;
+			}
+		}
+		return i;
+	}
+	public ObservableList<Projet> getObservableProjets(int uid) {
+		ObservableList<Projet> list = FXCollections.observableArrayList();
+		for (Projet e:this.projets){
+			if(e.getUser_id()==uid){
+				list.add(e);
+			}
+			
+		}
+		return list;
+	}
+
+
+	public void addProjets(Projet e) {
+		this.projets.add(e);
+	}
+	public void updateProjets(Projet e) {
+		int pos=0;
+		List<Projet>lem=this.projets;
+		for( int i = 0; i < lem.size(); i++ ){
+			Projet em=lem.get(i);
+			if(em.equals(e)){
+				pos=i;
+				break;
+			}
+		}
+		this.projets.remove(pos);
+		this.projets.add(pos, e);
+	}
+	public void delProjets(Projet e) {
+		List<Projet>lem=this.projets;
+		for( int i = 0; i < lem.size(); i++ ){
+			Projet em=lem.get(i);
+			if(em.equals(e)){
+				this.projets.remove(i);
+				
+				break;
+			}
+		}
+	}
+	public void delProjets(int id) {
+		List<Projet>lem=this.projets;
+		for( int i = 0; i < lem.size(); i++ ){
+			Projet em=lem.get(i);
+			if(em.getId()==id){
+				this.projets.remove(i);
+				JOptionPane.showMessageDialog(null, "supression faite!");
+				break;
+			}
+		}
+	}
+	
 	public void delInfos(int id) {
 		List<InfosDuJour>lem=this.infos;
 		for( int i = 0; i < lem.size(); i++ ){
@@ -305,6 +389,15 @@ public class Singleton
 		return p;
 		
 	}
+	public double calcRatioProjets(int uid) {
+		double total=Singleton.getInstance().getTotalProjetsUser(uid),faites=Singleton.getInstance().getTotalProjetsFiniUser(uid);
+		double p=(faites/total)*100;
+		if(total==0.0){
+			return 0.0;
+		}
+		return p;
+		
+	}
 	
 	public String EvenementsAvider(){
 		Date d = new Date(Calendar.getInstance().getTime().getTime());
@@ -372,7 +465,7 @@ public class Singleton
     private List<Emploi_du_temps>emplois;
     private List<Evenement>events;
     private List<Utilisateur>users;
-    
+    private List<Projet>projets;
 
     /** Point d'accès pour l'instance unique du singleton */
     public static Singleton getInstance()
@@ -426,6 +519,12 @@ public class Singleton
 				OutEmplois.writeObject(this.emplois);
 			//}
 			OutEmplois.close();
+			File f6=new File("projets.txt");
+			f6.createNewFile();
+			FileOutputStream projets= new FileOutputStream(f6);
+			ObjectOutputStream OutProjets = new ObjectOutputStream(projets);
+			OutProjets.writeObject(this.projets);
+			OutProjets.close();
 			Thread.sleep(2000);
 			JOptionPane.showMessageDialog(null, "sauvegarde faite!");
 		} catch (Exception e) {
@@ -447,6 +546,8 @@ public class Singleton
     		f4.createNewFile();
     		File f5=new File("emplois.txt");
     		f5.createNewFile();
+    		File f6=new File("projets.txt");
+    		f6.createNewFile();
 			FileInputStream notes= new FileInputStream(f1);
 			ObjectInputStream InCommemtaires = new ObjectInputStream(notes);
 			
@@ -477,6 +578,12 @@ public class Singleton
 				this.emplois=(List<Emploi_du_temps>) InEmplois.readObject();
 			
 			InEmplois.close();
+			FileInputStream projets= new FileInputStream(f6);
+			ObjectInputStream InProjets = new ObjectInputStream(projets);
+			
+				this.projets=(List<Projet>) InProjets.readObject();
+			
+			InProjets.close();
 			Thread.sleep(2000);
 			JOptionPane.showMessageDialog(null, "données chargées");
 		} catch (Exception e) {

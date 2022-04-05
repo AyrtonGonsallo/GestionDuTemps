@@ -56,10 +56,6 @@ public class AccueilController implements Initializable{
 	@FXML
 	private Label utilisateurs;//utilisateurs connectés
 	@FXML
-	private Button param;//aller vers parametres
-	@FXML
-	private Button suppr;//aller vers supprimer
-	@FXML
 	private Button actus;//aller vers actualités
 	@FXML
 	private Button cal;//aller vers le calendrier
@@ -113,6 +109,21 @@ public class AccueilController implements Initializable{
 	public void espaceAdmin(ActionEvent event) {
 		new Main().son2();
 		Main.setPane(15);
+	}
+	@FXML
+	public void projets(ActionEvent event) throws IOException {
+		new Main().son1();;
+		FXMLLoader le=new FXMLLoader();
+		le.setLocation(getClass().getResource( "/application/Projet.fxml"));
+		Object tableViewParent=le.load();
+		application.ProjetController pc=le.getController();
+		Main.le=le;
+		pc.initData(Main.id);
+		Main.root.getChildren().add((Pane)tableViewParent);
+		
+		Main.grid.set(16,(Pane)tableViewParent);
+        Main.setInd_c(16);
+		Main.root.getChildren().remove(Main.grid.get(0));
 	}
 	@FXML
 	public void save(ActionEvent event) {

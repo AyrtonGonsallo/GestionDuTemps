@@ -73,7 +73,13 @@ public class NotesController implements Initializable{
 		
 		try {
 			note c=new note();
-			c.setId(Singleton.getInstance().getnotes().size()+1);
+			List<note>ln=Singleton.getInstance().getnotes();
+			if(ln.size()==0){
+				c.setId(1);
+			}else{
+				c.setId(ln.get(ln.size()-1).getId()+1);
+			}
+			
 			c.setDate(d);
 			c.setTexte(com.getText());
 			c.setUser_id(Main.id);

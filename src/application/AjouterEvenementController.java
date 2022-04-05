@@ -11,6 +11,9 @@ import javax.swing.JOptionPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import objets.Evenement;
@@ -26,9 +29,13 @@ public class AjouterEvenementController implements Initializable {
 	@FXML
 	private TextArea txt_description;
 	@FXML
-	private TextField date;
+	private DatePicker date;
 	@FXML
-	private TextField heure;
+	private Spinner<Integer>heure; 
+	@FXML
+	private Spinner<Integer>minutes;
+	@FXML
+	private Spinner<Integer>secondes;
 	@FXML
 	public void enregistrer() {
 		new Main().son3();
@@ -46,10 +53,15 @@ public class AjouterEvenementController implements Initializable {
 		try {
 			List<Evenement>events=Singleton.getInstance().getEvents();
 			Evenement e=new Evenement();
-			e.setDate(Date.valueOf(date.getText()));
+			e.setDate(Date.valueOf(date.getValue()));
 			e.setDescription(txt_description.getText());
-			e.setHeure(Time.valueOf(heure.getText()) );
-			e.setId(events.get(events.size()-1).getId()+1);
+			e.setHeure(Time.valueOf(heure.getValue()+":"+minutes.getValue()+":"+secondes.getValue()) );
+			if(events.size()==0){
+				e.setId(1);
+			}else{
+				e.setId(events.get(events.size()-1).getId()+1);
+			}
+			
 			e.setTitre(txt_titre.getText());
 			e.setUser_id(Main.id);
 			Singleton.getInstance().addEvent(e);
@@ -64,7 +76,15 @@ public class AjouterEvenementController implements Initializable {
 	}
 	
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		heure.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 24)
+	        );
+		minutes.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60)
+	        );
+		secondes.setValueFactory(
+	            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 60)
+	        );
 		
 	}
 

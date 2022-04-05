@@ -18,7 +18,7 @@ import javafx.scene.media.MediaPlayer;
 public class Main extends Application {
 	
 	public static AnchorPane root;//la fenetre principale
-	public static List <Pane> grid=new ArrayList<Pane>(); //grid est une pile de type d'objet de type Pane.
+	public static List <Pane> grid=new ArrayList<Pane>();
 	private static int ind_c=6;
 	public static int id=0;
 	public static FXMLLoader le;
@@ -67,6 +67,8 @@ public class Main extends Application {
 			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/login/InfosCompte.fxml")));//13
 			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/application/Supprimer.fxml")));//14		
 			grid.add((AnchorPane) FXMLLoader.load(getClass().getResource("/application/admin.fxml")));//15	
+			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/projet.fxml")));//16
+			grid.add((Pane) FXMLLoader.load(getClass().getResource("/application/AjouterProjet.fxml")));//17
 			root.getChildren().add(grid.get(6));
 			
 			scene.getStylesheets().add(getClass().getResource("application.css" ).toExternalForm());

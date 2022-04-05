@@ -57,7 +57,12 @@ public class JoursController implements Initializable{
 		try {
 			List<InfosDuJour>infosliste=Singleton.getInstance().getInfos();
 			InfosDuJour i=new InfosDuJour();
-			i.setId(infosliste.get(infosliste.size()-1).getId()+1);
+			if(infosliste.size()==0){
+				i.setId(1);
+			}else{
+				i.setId(infosliste.get(infosliste.size()-1).getId()+1);
+			}
+			
 			i.setInformation(infos.getText());
 			i.setJour(d);
 			i.setUser_id(Main.id);

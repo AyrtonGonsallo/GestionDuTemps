@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" style="-fx-background-color: C0C0C0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AjouterProjetController">
+   <children>
+      <Accordion />
+      <VBox layoutX="122.0" layoutY="66.0" prefHeight="400.0" prefWidth="1000.0">
+         <children>
+            <TextField fx:id="txt_activite" promptText="titre">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </TextField>
+            
+            
+                  <TextArea fx:id="description" prefHeight="233.0" prefWidth="1000.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextArea>
+         </children>
+      </VBox>
+      <Button layoutX="122.0" layoutY="24.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="466.0" style="-fx-background-color: black;" text="Ajouter un projet" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="enregistrer" layoutX="1067.0" layoutY="511.0" mnemonicParsing="false" onAction="#enregistrer" prefHeight="39.0" prefWidth="131.0" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #0088ff;" text="Enregistrer" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="retour" layoutX="35.0" layoutY="521.0" mnemonicParsing="false" onAction="#retour" prefWidth="77.0" style="-fx-padding: 10px; -fx-font-weight: bold; -fx-background-color: #ff0000;" text="Retour" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

@@ -66,7 +66,12 @@ public class InscriptionController implements Initializable {
 			if(user_password1.getText().equals(user_password2.getText())){
 			Utilisateur u=new Utilisateur();
 			List<Utilisateur>users=Singleton.getInstance().getUsers();
-			u.setId(users.get(users.size()-1).getId()+1);
+			if(users.size()==0){
+				u.setId(1);
+			}else{
+				u.setId(users.get(users.size()-1).getId()+1);
+			}
+			
 			u.setLogin(user_id_up.getText());
 			u.setMotdepasse( user_password1.getText());
 			u.setEmail( email.getText());
